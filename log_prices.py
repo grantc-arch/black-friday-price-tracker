@@ -27,7 +27,7 @@ OUTPUT_FILE = Path("data/prices.csv")
 DELAY_SECONDS = 4  # pause between requests, keep it polite
 
 # CHANGE THIS: put your own contact so the site owner can reach you.
-USER_AGENT = "BlackFridayPriceStudy/1.0 (student research project; contact: your-email@example.com)"
+USER_AGENT = "BlackFridayPriceStudy/1.0 (student research project; contact: grantcox2005@gmail.com)"
 
 # Takealot's website loads product data from this JSON endpoint. It is not a
 # documented public API, so the version number may change over time.
