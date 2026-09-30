@@ -119,3 +119,43 @@ date,timestamp,retailer,product_id,name,category,price,was_price,in_stock,seller
 2026-09-29,2026-09-29T07:12:17+02:00,takealot,PLID92806505,Berries Weekend Pink Edition EDP for Women 100ml,Beauty & Personal Care,219.0,549.0,True,fragstop-fragrances,ok
 2026-09-29,2026-09-29T07:12:17+02:00,takealot,PLID72193294,Mocha Wood EDP 100ml Unisex,Beauty & Personal Care,229.0,699.0,True,lumitron-co,ok
 2026-09-29,2026-09-29T07:12:17+02:00,takealot,PLID94852232,Philips 1000 Series Wet & Dry Electric Shaver,Beauty & Personal Care,489.0,649.0,True,takealot,ok
+2026-09-30,2026-09-30T07:12:59+02:00,takealot,PLID103346940,Samsung 50 inch Q7F 4K QLED Samsung Vision AI TV,TVs & Audio,7399.0,8399.0,True,alcell,ok
+2026-09-30,2026-09-30T07:12:59+02:00,takealot,PLID100954595,Hisense 58 Inch 4K QLED Smart LED UHD TV,TVs & Audio,7419.0,,True,expertise,ok
+2026-09-30,2026-09-30T07:12:59+02:00,takealot,PLID102484220,Samsung 55-inch QN70H Neo QLED AI Smart TV,TVs & Audio,11999.0,13999.0,True,takealot,ok
+2026-09-30,2026-09-30T07:12:59+02:00,takealot,PLID71884619,Xiaomi Mi Smart Speaker - White,TVs & Audio,999.0,1199.0,True,takealot,ok
+2026-09-30,2026-09-30T07:12:59+02:00,takealot,PLID92893168,Sony WH-CH520 Wireless Bluetooth On-Ear Headphones,TVs & Audio,599.0,,False,takealot,ok
+2026-09-30,2026-09-30T07:12:59+02:00,takealot,PLID95228802,PlayStation 5 Slim Digital Edition Console (PS5 Slim),Computing & Gaming,14187.0,14999.0,True,celltrader,ok
+2026-09-30,2026-09-30T07:12:59+02:00,takealot,PLID70673129,Xbox Series S 512GB Digital Gaming Console,Computing & Gaming,10595.0,,True,takealot,ok
+2026-09-30,2026-09-30T07:12:59+02:00,takealot,PLID103136758,Acer Aspire Llight CEL-N4500 15.6 FHD 8GB 128GB SSD,Computing & Gaming,6499.0,6999.0,True,epic-vendor,ok
+2026-09-30,2026-09-30T07:12:59+02:00,takealot,PLID97593619,Acer Aspire Lite 16 WUXGA Core Ultra 7 16GB 1TB SSD Laptop,Computing & Gaming,20650.0,25000.0,True,ndlihcoinvestments,ok
+2026-09-30,2026-09-30T07:12:59+02:00,takealot,PLID97473646,Samsung Galaxy A36 5G Dual Sim 128GB - Awesome Lime,Computing & Gaming,7299.0,,True,any-tech,ok
+2026-09-30,2026-09-30T07:12:59+02:00,takealot,PLID103046524,Bosch Freestanding Dishwasher Series 4 14 Place A++,Large Appliances,7249.0,8999.0,True,takealot,ok
+2026-09-30,2026-09-30T07:12:59+02:00,takealot,PLID98948713,Samsung 17.5Kg AI Top Loader Washing Machine WA80F18S8CFA,Large Appliances,7999.0,,True,takealot,ok
+2026-09-30,2026-09-30T07:12:59+02:00,takealot,PLID70725210,Defy 157L Top Mount Fridge DAD238 - White,Large Appliances,4459.0,5199.0,True,yb-ambiente,ok
+2026-09-30,2026-09-30T07:12:59+02:00,takealot,PLID73732217,Defy MAC6030W 8L Portable Air Cooler,Large Appliances,1422.0,1448.0,True,truetech,ok
+2026-09-30,2026-09-30T07:12:59+02:00,takealot,PLID100778341,Hisense 198L Chest Freezer - Grey,Large Appliances,4499.0,,True,takealot,ok
+2026-09-30,2026-09-30T07:12:59+02:00,takealot,PLID98945485,Russell Hobbs Digital 9L Air Fryer RHAF09S,Small Appliances,1099.0,1499.0,True,takealot,ok
+2026-09-30,2026-09-30T07:12:59+02:00,takealot,PLID71185613,Instant Vortex Air Fryer,Small Appliances,1749.0,2499.0,True,takealot,ok
+2026-09-30,2026-09-30T07:12:59+02:00,takealot,PLID94919278,Russell Hobbs RHEM21L 20L Microwave,Small Appliances,1425.0,1599.0,True,dgt-agencies,ok
+2026-09-30,2026-09-30T07:12:59+02:00,takealot,PLID71892201,Mellerware Zambezi Kettle 1.7L 2200W,Small Appliances,332.0,399.0,True,tool-home,ok
+2026-09-30,2026-09-30T07:12:59+02:00,takealot,PLID73829901,Philips 5000 Series 2100W Hair Dryer,Small Appliances,589.0,799.0,True,takealot,ok
+2026-09-30,2026-09-30T07:12:59+02:00,takealot,PLID95934594,Garmin fenix E 47mm Stainless Steel/Graphite,Wearables & Power,10999.0,12999.0,True,takealot,ok
+2026-09-30,2026-09-30T07:12:59+02:00,takealot,PLID72467547,Garmin Forerunner 55 Smartwatch - Black,Wearables & Power,3199.0,3999.0,True,takealot,ok
+2026-09-30,2026-09-30T07:12:59+02:00,takealot,PLID95492581,EcoFlow RIVER 2 Pro Portable Power Station,Wearables & Power,10189.0,11999.0,True,takealot,ok
+2026-09-30,2026-09-30T07:12:59+02:00,takealot,PLID90290563,Gizzu 30W Mini DC 32Wh UPS,Wearables & Power,599.0,1099.0,True,elite-shopper,ok
+2026-09-30,2026-09-30T07:12:59+02:00,takealot,PLID100944815,Apple AirTag 1 pack (2nd Generation),Wearables & Power,649.0,669.0,True,takealot,ok
+2026-09-30,2026-09-30T07:12:59+02:00,takealot,PLID44310703,Red Bull Energy Drink 250ml 24 Case,Bulk & Pantry,359.0,419.0,True,takealot,ok
+2026-09-30,2026-09-30T07:12:59+02:00,takealot,PLID51978662,Finish All-in-One Max Dishwasher Tablets 80s Regular,Bulk & Pantry,369.0,,True,takealot,ok
+2026-09-30,2026-09-30T07:12:59+02:00,takealot,PLID94975579,Baby Soft Fresh White 2-Ply Toilet Paper 24 Pack,Bulk & Pantry,199.0,219.0,True,takealot,ok
+2026-09-30,2026-09-30T07:12:59+02:00,takealot,PLID54969418,Pampers Anti-Rash Shield Pants Size 4 120 Nappies,Bulk & Pantry,399.0,669.0,True,takealot,ok
+2026-09-30,2026-09-30T07:12:59+02:00,takealot,PLID72863979,Coca-Cola Original 24 x 300ml Cans,Bulk & Pantry,429.0,,True,one-by-two-wholesalers,ok
+2026-09-30,2026-09-30T07:12:59+02:00,takealot,PLID71332660,LEGO Icons Flower Bouquet 10280,Toys & Leisure,1099.0,,True,takealot,ok
+2026-09-30,2026-09-30T07:12:59+02:00,takealot,PLID99235547,Gabby's Dollhouse Meow-Mazing Dollhouse,Toys & Leisure,2299.0,,True,takealot,ok
+2026-09-30,2026-09-30T07:12:59+02:00,takealot,PLID93739845,GetUp Burst Graphite Padel Racket,Toys & Leisure,799.0,1299.0,True,takealot,ok
+2026-09-30,2026-09-30T07:12:59+02:00,takealot,PLID38154506,Medalist Neoprene Dumbbell 5kg,Toys & Leisure,249.0,,True,takealot,ok
+2026-09-30,2026-09-30T07:12:59+02:00,takealot,PLID95885084,GetUp Blaze 20-inch Bike,Toys & Leisure,1599.0,1999.0,True,takealot,ok
+2026-09-30,2026-09-30T07:12:59+02:00,takealot,PLID68567797,Elizabeth Arden Eight Hour Cream Skin Protectant 50ml,Beauty & Personal Care,339.0,490.0,True,takealot,ok
+2026-09-30,2026-09-30T07:12:59+02:00,takealot,PLID73714592,Maybelline Lash Sensational Sky High Mascara Black 01,Beauty & Personal Care,222.0,,True,takealot,ok
+2026-09-30,2026-09-30T07:12:59+02:00,takealot,PLID92806505,Berries Weekend Pink Edition EDP for Women 100ml,Beauty & Personal Care,219.0,549.0,True,fragstop-fragrances,ok
+2026-09-30,2026-09-30T07:12:59+02:00,takealot,PLID72193294,Mocha Wood EDP 100ml Unisex,Beauty & Personal Care,229.0,699.0,True,lumitron-co,ok
+2026-09-30,2026-09-30T07:12:59+02:00,takealot,PLID94852232,Philips 1000 Series Wet & Dry Electric Shaver,Beauty & Personal Care,489.0,649.0,True,takealot,ok
