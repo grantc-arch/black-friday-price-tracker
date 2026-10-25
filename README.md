@@ -36,6 +36,13 @@ separately.
 ## Definitions (fix these before you see results)
 - Genuine deal: Black Friday price is below the lowest price in the prior 30 days.
 - Inflated "was" price: the advertised was-price never appeared as the selling price.
+- Baseline period: 28 September 2026 through 25 October 2026 (the day before Takealot's Black November sale began).
+- Sale period: 26 October 2026 onward.
+- Genuine deal: sale price is below the lowest price recorded during the baseline period.
+- Inflated "was" price: the advertised was-price never appeared as the actual selling price during the baseline period.
+
+- ## Timing note
+Takealot announced the 2026 Black November sale would start 26 October — earlier and more abrupt than the gradual "countdown" sale structure used in 2025 (per BusinessTech's coverage), which ramped up through November. Worth checking in the analysis whether prices shifted gradually or jumped all at once on the 26th.
 
 ## Ethics
 Check each retailer's terms, one pass a day, honest User-Agent, stop if blocked.
