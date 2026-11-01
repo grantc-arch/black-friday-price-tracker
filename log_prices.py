@@ -220,3 +220,36 @@ def main():
             row = {"date": now.date().isoformat(), "timestamp": now.isoformat(timespec="seconds"),
                    "retailer": retailer, "product_id": "", "name": p.get("name", ""),
                    "category": p.get("category", ""), "price": "", "was_price": "",
+                   "in_stock": "", "seller": "", "status": "no_fetcher"}
+            if stopped_early:
+                row["status"] = "skipped_rate_limited"
+            elif fetch:
+                try:
+                    result = fetch(p["url"], debug=(debug and i == 0))
+                    for k, v in result.items():
+                        if v is not None and (k != "name" or not row["name"]):
+                            row[k] = v
+                except Exception as e:  # network errors, bad JSON, etc.
+                    row["status"] = f"error_{type(e).__name__}"
+            if row["status"] == "ok":
+                ok += 1
+            if row["status"].startswith("http_429"):
+                rate_limited_in_a_row += 1
+                if rate_limited_in_a_row >= MAX_CONSECUTIVE_RATE_LIMITED and not stopped_early:
+                    stopped_early = True
+                    print(f"\nStill rate limited after retries on {rate_limited_in_a_row} products "
+                          "in a row. Stopping early; remaining products are logged as skipped.\n")
+            elif row["status"] != "skipped_rate_limited":
+                rate_limited_in_a_row = 0
+            writer.writerow(row)
+            print(f"{row['status']:<14} {row['name'][:45]:<45} price={row['price']} was={row['was_price']} seller={row['seller']}")
+            if i < len(products) - 1 and not stopped_early:
+                time.sleep(DELAY_SECONDS)
+
+    print(f"\n{ok}/{len(products)} products logged successfully.")
+    if products and ok == 0:
+        sys.exit(1)  # makes the GitHub Actions run show as failed
+
+
+if __name__ == "__main__":
+    main()
