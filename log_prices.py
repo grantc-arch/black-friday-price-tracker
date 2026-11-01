@@ -17,6 +17,7 @@ Usage:
 """
 import csv
 import json
+import random
 import re
 import sys
 import time
@@ -28,10 +29,22 @@ import requests
 # ---- Settings -------------------------------------------------------------
 PRODUCTS_FILE = Path("products.csv")
 OUTPUT_FILE = Path("data/prices.csv")
-DELAY_SECONDS = 4  # pause between requests, keep it polite
+DELAY_SECONDS = 8  # pause between products, keep it polite (was 4; Takealot rate-limited us on 30 Oct)
 
-# CHANGE THIS: put your own contact so the site owner can reach you.
-USER_AGENT = "BlackFridayPriceStudy/1.0 (student research project; contact: your-email@example.com)"
+# Retry settings for rate limits (HTTP 429) and temporary server errors.
+# Waits are 30s, 60s, 120s (plus a little random jitter) unless the site sends
+# a Retry-After header, which is respected (capped at MAX_WAIT_SECONDS).
+MAX_RETRIES = 3
+BASE_WAIT_SECONDS = 30
+MAX_WAIT_SECONDS = 300
+RETRY_STATUSES = {429, 500, 502, 503, 504}
+# If this many products in a row still hit the rate limit after all retries,
+# stop the run instead of hammering the site. The rest are logged as skipped.
+MAX_CONSECUTIVE_RATE_LIMITED = 3
+
+# Identifies this tool to the site. A contact URL or email can be added in the
+# brackets if you want the site owner to be able to reach you.
+USER_AGENT = "BlackFridayPriceStudy/1.0 (student research project)"
 
 # Takealot's website loads product data from this JSON endpoint. It is not a
 # documented public API, so the version number may change over time.
@@ -115,14 +128,47 @@ def parse_takealot(data):
     return name, price, was, stock, seller
 
 
+def get_with_backoff(url):
+    """GET with retries on rate limits / temporary errors. Returns the final response.
+
+    Raises only if every attempt failed with a network error (timeout, DNS, ...).
+    """
+    last_error = None
+    for attempt in range(MAX_RETRIES + 1):
+        try:
+            resp = requests.get(url,
+                                headers={"User-Agent": USER_AGENT, "Accept": "application/json"},
+                                timeout=30)
+            last_error = None
+        except (requests.ConnectionError, requests.Timeout) as e:
+            resp, last_error = None, e
+
+        if resp is not None and resp.status_code not in RETRY_STATUSES:
+            return resp
+        if attempt == MAX_RETRIES:
+            break
+
+        wait = BASE_WAIT_SECONDS * (2 ** attempt)
+        if resp is not None:
+            retry_after = resp.headers.get("Retry-After", "")
+            if retry_after.isdigit():
+                wait = int(retry_after)
+        wait = min(wait, MAX_WAIT_SECONDS) + random.uniform(0, 5)
+        reason = f"http_{resp.status_code}" if resp is not None else type(last_error).__name__
+        print(f"    {reason}, retry {attempt + 1}/{MAX_RETRIES} in {wait:.0f}s")
+        time.sleep(wait)
+
+    if resp is None:
+        raise last_error
+    return resp
+
+
 def fetch_takealot(url, debug=False):
     match = re.search(r"PLID\d+", url, re.IGNORECASE)
     if not match:
         return {"status": "bad_url"}
     plid = match.group(0).upper()  # API wants the full "PLID103346940" form
-    resp = requests.get(TAKEALOT_API.format(plid=plid),
-                        headers={"User-Agent": USER_AGENT, "Accept": "application/json"},
-                        timeout=30)
+    resp = get_with_backoff(TAKEALOT_API.format(plid=plid))
     if resp.status_code != 200:
         detail = ""
         try:
@@ -161,6 +207,8 @@ def main():
     new_file = not OUTPUT_FILE.exists()
     now = datetime.now(SAST)
     ok = 0
+    rate_limited_in_a_row = 0
+    stopped_early = False
 
     with OUTPUT_FILE.open("a", newline="", encoding="utf-8") as out:
         writer = csv.DictWriter(out, fieldnames=FIELDS)
@@ -172,26 +220,3 @@ def main():
             row = {"date": now.date().isoformat(), "timestamp": now.isoformat(timespec="seconds"),
                    "retailer": retailer, "product_id": "", "name": p.get("name", ""),
                    "category": p.get("category", ""), "price": "", "was_price": "",
-                   "in_stock": "", "seller": "", "status": "no_fetcher"}
-            if fetch:
-                try:
-                    result = fetch(p["url"], debug=(debug and i == 0))
-                    for k, v in result.items():
-                        if v is not None and (k != "name" or not row["name"]):
-                            row[k] = v
-                except Exception as e:  # network errors, bad JSON, etc.
-                    row["status"] = f"error_{type(e).__name__}"
-            if row["status"] == "ok":
-                ok += 1
-            writer.writerow(row)
-            print(f"{row['status']:<14} {row['name'][:45]:<45} price={row['price']} was={row['was_price']} seller={row['seller']}")
-            if i < len(products) - 1:
-                time.sleep(DELAY_SECONDS)
-
-    print(f"\n{ok}/{len(products)} products logged successfully.")
-    if products and ok == 0:
-        sys.exit(1)  # makes the GitHub Actions run show as failed
-
-
-if __name__ == "__main__":
-    main()
