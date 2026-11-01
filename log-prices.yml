@@ -2,26 +2,54 @@ name: Log prices
 
 on:
   schedule:
-    - cron: "0 5 * * *"   # 05:00 UTC = 07:00 SAST, daily
-  workflow_dispatch:        # lets you run it manually from the Actions tab
+    - cron: "0 5 * * *"              # daily, 07:00 SAST
+    - cron: "30 22 26 11 *"          # 00:30 SAST on 27 Nov, just after Black Friday deals drop
+    - cron: "0 9,14,19 27-30 11 *"   # 11:00, 16:00, 21:00 SAST on 27-30 Nov
+  workflow_dispatch:                 # manual run from the Actions tab
 
 permissions:
   contents: write
 
+concurrency:
+  group: log-prices
+  cancel-in-progress: false
+
 jobs:
   log:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+
       - run: pip install -r requirements.txt
-      - run: python log_prices.py
+
+      - name: Log prices
+        run: python log_prices.py
+
       - name: Commit updated price log
+        if: always()
         run: |
           git config user.name "price-logger"
           git config user.email "price-logger@users.noreply.github.com"
           git add data/prices.csv
-          git diff --staged --quiet || git commit -m "Price log $(date -u +%F)"
+          git diff --staged --quiet || git commit -m "Price log $(date -u +%F-%H%M)"
+          git pull --rebase
           git push
+
+      - name: Fail the run if too many products failed
+        run: |
+          python - <<'PY'
+          import csv
+          rows = list(csv.DictReader(open("data/prices.csv", newline="", encoding="utf-8")))
+          last = max(r["timestamp"] for r in rows)
+          batch = [r for r in rows if r["timestamp"] == last]
+          bad = [r for r in batch if r["status"] != "ok"]
+          print(f"{len(batch) - len(bad)}/{len(batch)} products logged OK in the latest run")
+          if len(bad) > max(3, len(batch) // 10):
+              print("Too many failures, for example:", bad[0]["status"])
+              raise SystemExit(1)
+          PY
